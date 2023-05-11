@@ -32,7 +32,7 @@ contract Schnorr {
     address R = ecrecover(sp, parity, px, ep);
     require(R != address(0), "ecrecover failed");
     
-    // abi.encodePacked(...) returns (bytes memory): Performs packed encoding of the given arguments. Note that this encoding can be ambiguous!
+    // abi.encodePacked() returns (bytes memory): Performs packed encoding of the given arguments. Note that this encoding can be ambiguous!
     return e == keccak256(
       abi.encodePacked(R, uint8(parity), px, message)
     );
