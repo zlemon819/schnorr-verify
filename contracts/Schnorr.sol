@@ -26,8 +26,13 @@ contract Schnorr {
     // the ecrecover precompile implementation checks that the `r` and `s`
     // inputs are non-zero (in this case, `px` and `ep`), thus we don't need to
     // check if they're zero.
+   
+    // ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) returns (address): recover address 
+    // associated with the public key from elliptic curve signature, return zero on error 
     address R = ecrecover(sp, parity, px, ep);
     require(R != address(0), "ecrecover failed");
+    
+    // abi.encodePacked(...) returns (bytes memory): Performs packed encoding of the given arguments. Note that this encoding can be ambiguous!
     return e == keccak256(
       abi.encodePacked(R, uint8(parity), px, message)
     );
